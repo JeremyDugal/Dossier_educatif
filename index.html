@@ -1,250 +1,101 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Rapports">
 <title>Rapports éducatifs</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;background:#F5F5F7;color:#1C1C1E;min-height:100vh;}
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
-    background: #F5F5F7;
-    color: #1C1C1E;
-    min-height: 100vh;
-  }
+/* TOPBARS */
+.topbar{background:#fff;border-bottom:1px solid #E0E0E0;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.topbar h1{font-size:17px;font-weight:600;}
+.btn-new{background:#2980B9;color:#fff;border:none;border-radius:10px;padding:8px 14px;font-size:14px;font-weight:500;cursor:pointer;}
+.form-topbar{background:#fff;border-bottom:1px solid #E0E0E0;padding:14px 18px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100;}
+.btn-back{background:none;border:none;color:#2980B9;font-size:15px;cursor:pointer;padding:4px 0;display:flex;align-items:center;gap:4px;white-space:nowrap;}
+.form-title{font-size:16px;font-weight:600;flex:1;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.btn-save-top{background:#27AE60;color:#fff;border:none;border-radius:10px;padding:8px 14px;font-size:14px;font-weight:500;cursor:pointer;white-space:nowrap;}
 
-  /* ── TOP BAR ── */
-  .topbar {
-    background: #fff;
-    border-bottom: 1px solid #E0E0E0;
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .topbar h1 { font-size: 17px; font-weight: 600; }
-  .btn-new {
-    background: #2980B9;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 8px 14px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-  }
+/* VIEWS */
+#view-list,#view-form,#view-backup{display:none;}
+#view-list.active,#view-form.active,#view-backup.active{display:block;}
 
-  /* ── VIEWS ── */
-  #view-list, #view-form { display: none; }
-  #view-list.active, #view-form.active { display: block; }
+/* LIST */
+.list-wrap{padding:18px;}
+.list-empty{text-align:center;color:#8E8E93;margin-top:60px;font-size:15px;line-height:1.8;}
+.list-empty .icon{font-size:48px;margin-bottom:12px;}
+.rapport-card{background:#fff;border-radius:14px;padding:14px 16px;margin-bottom:12px;border:1px solid #E0E0E0;display:flex;align-items:center;justify-content:space-between;-webkit-tap-highlight-color:transparent;}
+.card-info{flex:1;cursor:pointer;}
+.card-name{font-size:16px;font-weight:600;margin-bottom:3px;}
+.card-date{font-size:13px;color:#8E8E93;}
+.card-right{display:flex;align-items:center;gap:10px;}
+.btn-delete{background:#FFEAEA;color:#C0392B;border:none;border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer;}
+.card-arrow{font-size:22px;color:#C7C7CC;cursor:pointer;}
+.backup-btn-wrap{margin-top:24px;text-align:center;}
+.btn-backup-link{background:none;border:none;color:#2980B9;font-size:14px;cursor:pointer;text-decoration:underline;}
 
-  /* ── LIST VIEW ── */
-  .list-wrap { padding: 18px; }
-  .list-empty {
-    text-align: center;
-    color: #8E8E93;
-    margin-top: 60px;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-  .list-empty .icon { font-size: 48px; margin-bottom: 12px; }
-  .rapport-card {
-    background: #fff;
-    border-radius: 14px;
-    padding: 16px;
-    margin-bottom: 12px;
-    border: 1px solid #E0E0E0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .rapport-card:active { background: #F0F0F5; }
-  .card-info {}
-  .card-name { font-size: 16px; font-weight: 600; margin-bottom: 3px; }
-  .card-date { font-size: 13px; color: #8E8E93; }
-  .card-arrow { font-size: 18px; color: #C7C7CC; }
-  .card-actions { display: flex; gap: 8px; }
-  .btn-delete {
-    background: #FFEAEA;
-    color: #C0392B;
-    border: none;
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-size: 13px;
-    cursor: pointer;
-  }
+/* FORM */
+.form-body{padding:18px;padding-bottom:110px;}
+.field-block{margin-bottom:16px;}
+.field-block label{display:block;font-size:12px;font-weight:600;color:#8E8E93;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
+.field-block input[type=“text”],.field-block input[type=“date”]{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #E0E0E0;background:#fff;font-size:16px;color:#1C1C1E;font-family:inherit;-webkit-appearance:none;}
+.field-block input:focus{outline:2px solid #2980B9;border-color:transparent;}
+.domaine-card{border-radius:14px;overflow:hidden;margin-bottom:18px;border:2px solid;}
+.domaine-header{padding:12px 16px;font-size:15px;font-weight:600;color:#fff;}
+.sous-section{padding:12px 14px;border-top:1px solid;}
+.sous-section label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;}
+.sous-section textarea{width:100%;min-height:80px;padding:10px 12px;border-radius:10px;border:1px solid rgba(0,0,0,0.12);background:rgba(255,255,255,0.75);font-size:15px;font-family:inherit;color:#1C1C1E;resize:vertical;line-height:1.5;}
+.sous-section textarea:focus{outline:none;border-color:rgba(0,0,0,0.4);}
+.autosave-note{text-align:center;font-size:12px;color:#8E8E93;margin-top:-10px;margin-bottom:18px;}
+.autosave-note.saved{color:#27AE60;}
 
-  /* ── FORM VIEW ── */
-  .form-topbar {
-    background: #fff;
-    border-bottom: 1px solid #E0E0E0;
-    padding: 14px 18px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .btn-back {
-    background: none;
-    border: none;
-    color: #2980B9;
-    font-size: 15px;
-    cursor: pointer;
-    padding: 4px 0;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    white-space: nowrap;
-  }
-  .form-title { font-size: 16px; font-weight: 600; flex: 1; text-align: center; }
-  .btn-save-top {
-    background: #27AE60;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 8px 14px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap;
-  }
+/* BOTTOM BAR */
+.form-actions{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,0.96);border-top:1px solid #E0E0E0;padding:12px 18px;padding-bottom:max(12px,env(safe-area-inset-bottom));display:flex;gap:10px;backdrop-filter:blur(10px);}
+.btn-pdf{flex:1;background:#2980B9;color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;}
+.btn-save-bottom{flex:1;background:#27AE60;color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;}
 
-  .form-body { padding: 18px; padding-bottom: 100px; }
+/* BACKUP VIEW */
+.backup-wrap{padding:18px;}
+.backup-section{background:#fff;border-radius:14px;border:1px solid #E0E0E0;padding:18px;margin-bottom:18px;}
+.backup-section h2{font-size:15px;font-weight:600;margin-bottom:6px;}
+.backup-section p{font-size:13px;color:#8E8E93;line-height:1.6;margin-bottom:14px;}
+.btn-export{width:100%;background:#2980B9;color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;margin-bottom:10px;}
+.btn-import{width:100%;background:#fff;color:#2980B9;border:2px solid #2980B9;border-radius:12px;padding:13px;font-size:15px;font-weight:600;cursor:pointer;}
+.backup-section.danger h2{color:#C0392B;}
+.btn-danger{width:100%;background:#FFEAEA;color:#C0392B;border:none;border-radius:12px;padding:13px;font-size:15px;font-weight:600;cursor:pointer;}
+.import-status{font-size:13px;margin-top:10px;text-align:center;min-height:20px;}
+.import-status.ok{color:#27AE60;}
+.import-status.err{color:#C0392B;}
+.stats-row{display:flex;gap:10px;margin-bottom:14px;}
+.stat-card{flex:1;background:#F5F5F7;border-radius:10px;padding:12px;text-align:center;}
+.stat-num{font-size:24px;font-weight:700;color:#1C1C1E;}
+.stat-label{font-size:11px;color:#8E8E93;margin-top:2px;}
 
-  .field-block { margin-bottom: 18px; }
-  .field-block label {
-    display: block;
-    font-size: 12px;
-    font-weight: 600;
-    color: #8E8E93;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 6px;
-  }
-  .field-block input[type="text"],
-  .field-block input[type="date"] {
-    width: 100%;
-    padding: 12px 14px;
-    border-radius: 12px;
-    border: 1px solid #E0E0E0;
-    background: #fff;
-    font-size: 16px;
-    color: #1C1C1E;
-    font-family: inherit;
-    -webkit-appearance: none;
-  }
-  .field-block input:focus { outline: 2px solid #2980B9; border-color: transparent; }
-
-  /* ── DOMAINE CARD ── */
-  .domaine-card {
-    border-radius: 14px;
-    overflow: hidden;
-    margin-bottom: 18px;
-    border: 2px solid;
-  }
-  .domaine-header {
-    padding: 12px 16px;
-    font-size: 15px;
-    font-weight: 600;
-    color: #fff;
-  }
-  .sous-section {
-    padding: 12px 14px;
-    border-top: 1px solid;
-  }
-  .sous-section label {
-    display: block;
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-  .sous-section textarea {
-    width: 100%;
-    min-height: 80px;
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 1px solid rgba(0,0,0,0.12);
-    background: rgba(255,255,255,0.75);
-    font-size: 15px;
-    font-family: inherit;
-    color: #1C1C1E;
-    resize: vertical;
-    line-height: 1.5;
-  }
-  .sous-section textarea:focus { outline: none; border-color: rgba(0,0,0,0.4); }
-
-  /* ── BOTTOM ACTIONS ── */
-  .form-actions {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    background: rgba(255,255,255,0.95);
-    border-top: 1px solid #E0E0E0;
-    padding: 12px 18px;
-    display: flex;
-    gap: 10px;
-    backdrop-filter: blur(10px);
-  }
-  .btn-print-pdf {
-    flex: 1;
-    background: #2980B9;
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 14px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .btn-save-bottom {
-    flex: 1;
-    background: #27AE60;
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 14px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .save-indicator {
-    text-align: center;
-    font-size: 12px;
-    color: #8E8E93;
-    padding: 6px 0 0;
-  }
-  .save-indicator.saved { color: #27AE60; }
-
-  /* ── PRINT ── */
-  @media print {
-    body { background: #fff; }
-    .topbar, .form-topbar, .form-actions, .btn-back, .btn-save-top { display: none !important; }
-    #view-list { display: none !important; }
-    #view-form { display: block !important; }
-    .form-body { padding: 0; }
-    .field-block input { border: none; border-bottom: 1px solid #ccc; border-radius: 0; padding: 4px 0; font-size: 18px; }
-    .sous-section textarea { border: none; border-bottom: 1px solid #ccc; border-radius: 0; background: transparent; min-height: 70px; }
-    .domaine-card { page-break-inside: avoid; margin-bottom: 14px; }
-    .form-body { padding-bottom: 0; }
-  }
+/* PRINT */
+@media print{
+body{background:#fff;}
+.topbar,.form-topbar,.form-actions,.btn-back,.btn-save-top,#view-list,#view-backup,.autosave-note{display:none!important;}
+#view-form{display:block!important;}
+.form-body{padding:0 16px;padding-bottom:0;}
+.field-block input{border:none;border-bottom:1px solid #ccc;border-radius:0;padding:4px 0;font-size:18px;}
+.sous-section textarea{border:none;border-bottom:1px solid #ddd;border-radius:0;background:transparent;min-height:70px;}
+.domaine-card{page-break-inside:avoid;margin-bottom:14px;}
+}
 </style>
+
 </head>
 <body>
 
-<!-- ══ LIST VIEW ══ -->
+<!-- ══ LISTE ══ -->
+
 <div id="view-list">
   <div class="topbar">
-    <h1>Mes rapports</h1>
+    <h1>📋 Mes rapports</h1>
     <button class="btn-new" onclick="nouveauRapport()">+ Nouveau</button>
   </div>
   <div class="list-wrap">
@@ -254,17 +105,20 @@
       Appuyez sur <strong>+ Nouveau</strong> pour commencer.
     </div>
     <div id="list-rapports"></div>
+    <div class="backup-btn-wrap">
+      <button class="btn-backup-link" onclick="afficherVue('backup')">⚙ Sauvegarde &amp; restauration</button>
+    </div>
   </div>
 </div>
 
-<!-- ══ FORM VIEW ══ -->
+<!-- ══ FORMULAIRE ══ -->
+
 <div id="view-form">
   <div class="form-topbar">
     <button class="btn-back" onclick="retourListe()">‹ Retour</button>
     <span class="form-title" id="form-title-bar">Nouveau rapport</span>
     <button class="btn-save-top" onclick="sauvegarder()">Sauvegarder</button>
   </div>
-
   <div class="form-body">
     <div class="field-block">
       <label>Nom de l'enfant</label>
@@ -274,189 +128,303 @@
       <label>Date du rapport</label>
       <input type="date" id="champ-date">
     </div>
-
+    <p class="autosave-note" id="autosave-note">Les données sont sauvegardées automatiquement.</p>
     <div id="domaines-form"></div>
   </div>
-
   <div class="form-actions">
     <button class="btn-save-bottom" onclick="sauvegarder()">💾 Sauvegarder</button>
-    <button class="btn-print-pdf" onclick="imprimerPDF()">🖨 PDF</button>
+    <button class="btn-pdf" onclick="imprimerPDF()">🖨 PDF</button>
+  </div>
+</div>
+
+<!-- ══ SAUVEGARDE ══ -->
+
+<div id="view-backup">
+  <div class="topbar">
+    <h1>Sauvegarde</h1>
+    <button class="btn-new" style="background:#8E8E93;" onclick="afficherVue('list')">Retour</button>
+  </div>
+  <div class="backup-wrap">
+
+```
+<div class="backup-section">
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num" id="stat-count">0</div><div class="stat-label">rapports</div></div>
+    <div class="stat-card"><div class="stat-num" id="stat-date">—</div><div class="stat-label">dernière sauvegarde</div></div>
+  </div>
+  <h2>📤 Exporter une copie</h2>
+  <p>Crée un fichier de sauvegarde à envoyer dans Google Drive, par courriel ou garder dans les Fichiers de l'iPad. En cas de problème, ce fichier permet de tout récupérer.</p>
+  <button class="btn-export" onclick="exporterDonnees()">Exporter mes rapports</button>
+</div>
+
+<div class="backup-section">
+  <h2>📥 Importer une sauvegarde</h2>
+  <p>Si vous avez changé d'appareil ou perdu les données, importez votre fichier de sauvegarde pour tout récupérer. Les rapports existants seront conservés.</p>
+  <button class="btn-import" onclick="document.getElementById('input-import').click()">Choisir un fichier de sauvegarde</button>
+  <input type="file" id="input-import" accept=".json" style="display:none" onchange="importerDonnees(event)">
+  <div class="import-status" id="import-status"></div>
+</div>
+
+<div class="backup-section danger">
+  <h2>⚠ Effacer toutes les données</h2>
+  <p>Supprime définitivement tous les rapports de cet appareil. Faites une exportation d'abord si vous voulez garder une copie.</p>
+  <button class="btn-danger" onclick="toutEffacer()">Effacer tous les rapports</button>
+</div>
+```
+
   </div>
 </div>
 
 <script>
 const DOMAINES = [
-  { id: "physique",  titre: "Domaine physique et moteur", couleur: "#E67E22", bordure: "#c96a0c", fond: "#FEF3E7", texte: "#7a3e0a" },
-  { id: "cognitif",  titre: "Domaine cognitif",            couleur: "#8E44AD", bordure: "#6c2f8a", fond: "#F5EEF8", texte: "#4a1f6e" },
-  { id: "langagier", titre: "Domaine langagier",           couleur: "#C0392B", bordure: "#922b21", fond: "#FDEDEC", texte: "#7b241c" },
-  { id: "social",    titre: "Domaine social et affectif",  couleur: "#2980B9", bordure: "#1a6091", fond: "#EBF5FB", texte: "#1a4f70" },
+  {id:"physique", titre:"Domaine physique et moteur", couleur:"#E67E22", bordure:"#c96a0c", fond:"#FEF3E7", texte:"#7a3e0a"},
+  {id:"cognitif", titre:"Domaine cognitif",           couleur:"#8E44AD", bordure:"#6c2f8a", fond:"#F5EEF8", texte:"#4a1f6e"},
+  {id:"langagier",titre:"Domaine langagier",          couleur:"#C0392B", bordure:"#922b21", fond:"#FDEDEC", texte:"#7b241c"},
+  {id:"social",   titre:"Domaine social et affectif", couleur:"#2980B9", bordure:"#1a6091", fond:"#EBF5FB", texte:"#1a4f70"},
 ];
 const SOUS = [
-  { id: "progresse", label: "J'ai progressé…" },
-  { id: "decouvrir", label: "Je veux découvrir… m'améliorer…" },
-  { id: "aider",     label: "Comment m'aider…" },
+  {id:"progresse", label:"J'ai progressé…"},
+  {id:"decouvrir", label:"Je veux découvrir… m'améliorer…"},
+  {id:"aider",     label:"Comment m'aider…"},
 ];
 
 let rapports = JSON.parse(localStorage.getItem("mangrove_rapports") || "[]");
 let idActif = null;
+let autoSaveTimer = null;
 
-// ── Build form domains once ──
-(function buildForm() {
+/* ── Construire les domaines dans le formulaire ── */
+(function buildForm(){
   const wrap = document.getElementById("domaines-form");
   DOMAINES.forEach(d => {
     const card = document.createElement("div");
     card.className = "domaine-card";
     card.style.borderColor = d.bordure;
-
     let html = `<div class="domaine-header" style="background:${d.couleur};">${d.titre}</div>`;
     SOUS.forEach(s => {
-      html += `
-        <div class="sous-section" style="border-top-color:${d.bordure}; background:${d.fond};">
-          <label style="color:${d.texte};">${s.label}</label>
-          <textarea id="${d.id}_${s.id}" placeholder="Écrivez ici…"></textarea>
-        </div>`;
-    });
-    card.innerHTML = html;
-    wrap.appendChild(card);
-  });
+      html += `<div class="sous-section" style="border-top-color:${d.bordure};background:${d.fond};">
+        <label style="color:${d.texte};">${s.label}</label>
+        <textarea id="${d.id}_${s.id}" placeholder="Écrivez ici…" oninput="autoSave()"></textarea>
+
+```
+  </div>`;
+});
+card.innerHTML = html;
+wrap.appendChild(card);
+```
+
+});
 })();
 
-function sauvegarder() {
-  const rapport = collecterFormulaire();
-  if (!rapport.nom) {
-    document.getElementById("champ-nom").focus();
-    alert("Veuillez entrer le nom de l'enfant.");
-    return;
-  }
-  if (idActif !== null) {
-    const idx = rapports.findIndex(r => r.id === idActif);
-    if (idx !== -1) rapports[idx] = rapport;
-  } else {
-    rapports.unshift(rapport);
-    idActif = rapport.id;
-  }
-  localStorage.setItem("mangrove_rapports", JSON.stringify(rapports));
-  afficherIndicateur();
-  document.getElementById("form-title-bar").textContent = rapport.nom || "Nouveau rapport";
+/* ── Auto-save ── */
+function autoSave(){
+clearTimeout(autoSaveTimer);
+autoSaveTimer = setTimeout(() => {
+const nom = document.getElementById(“champ-nom”).value.trim();
+if(!nom) return;
+sauvegarder(true);
+}, 1500);
 }
 
-function collecterFormulaire() {
-  const id = idActif !== null ? idActif : Date.now();
-  const nom = document.getElementById("champ-nom").value.trim();
-  const date = document.getElementById("champ-date").value;
-  const domaines = {};
-  DOMAINES.forEach(d => {
-    domaines[d.id] = {};
-    SOUS.forEach(s => {
-      domaines[d.id][s.id] = document.getElementById(`${d.id}_${s.id}`).value;
-    });
-  });
-  return { id, nom, date, domaines };
+/* ── Sauvegarder ── */
+function sauvegarder(silencieux=false){
+const rapport = collecterFormulaire();
+if(!rapport.nom){
+if(!silencieux){ document.getElementById(“champ-nom”).focus(); alert(“Veuillez entrer le nom de l’enfant.”); }
+return;
+}
+if(idActif !== null){
+const idx = rapports.findIndex(r => r.id === idActif);
+if(idx !== -1) rapports[idx] = rapport;
+else { rapports.unshift(rapport); }
+} else {
+idActif = rapport.id;
+rapports.unshift(rapport);
+}
+localStorage.setItem(“mangrove_rapports”, JSON.stringify(rapports));
+localStorage.setItem(“mangrove_last_save”, new Date().toISOString());
+if(!silencieux) montrerConfirmation();
+else mettreAJourNoteAuto();
+document.getElementById(“form-title-bar”).textContent = rapport.nom;
 }
 
-function chargerDansFormulaire(rapport) {
-  document.getElementById("champ-nom").value = rapport.nom || "";
-  document.getElementById("champ-date").value = rapport.date || "";
-  document.getElementById("form-title-bar").textContent = rapport.nom || "Nouveau rapport";
-  DOMAINES.forEach(d => {
-    SOUS.forEach(s => {
-      const el = document.getElementById(`${d.id}_${s.id}`);
-      el.value = (rapport.domaines && rapport.domaines[d.id] && rapport.domaines[d.id][s.id]) || "";
-    });
-  });
+function montrerConfirmation(){
+const note = document.getElementById(“autosave-note”);
+const heure = new Date().toLocaleTimeString(“fr-CA”,{hour:“2-digit”,minute:“2-digit”});
+note.textContent = “✓ Sauvegardé à “ + heure;
+note.className = “autosave-note saved”;
+setTimeout(() => {
+note.textContent = “Les données sont sauvegardées automatiquement.”;
+note.className = “autosave-note”;
+}, 3000);
 }
 
-function viderFormulaire() {
-  document.getElementById("champ-nom").value = "";
-  const today = new Date().toISOString().split("T")[0];
-  document.getElementById("champ-date").value = today;
-  document.getElementById("form-title-bar").textContent = "Nouveau rapport";
-  DOMAINES.forEach(d => SOUS.forEach(s => { document.getElementById(`${d.id}_${s.id}`).value = ""; }));
+function mettreAJourNoteAuto(){
+const note = document.getElementById(“autosave-note”);
+const heure = new Date().toLocaleTimeString(“fr-CA”,{hour:“2-digit”,minute:“2-digit”});
+note.textContent = “✓ Sauvegarde automatique à “ + heure;
+note.className = “autosave-note saved”;
+setTimeout(() => {
+note.textContent = “Les données sont sauvegardées automatiquement.”;
+note.className = “autosave-note”;
+}, 2000);
 }
 
-function mettreAJourTitre() {
-  const nom = document.getElementById("champ-nom").value.trim();
-  document.getElementById("form-title-bar").textContent = nom || "Nouveau rapport";
+/* ── Collecte ── */
+function collecterFormulaire(){
+const id = idActif !== null ? idActif : Date.now();
+const nom = document.getElementById(“champ-nom”).value.trim();
+const date = document.getElementById(“champ-date”).value;
+const domaines = {};
+DOMAINES.forEach(d => {
+domaines[d.id] = {};
+SOUS.forEach(s => { domaines[d.id][s.id] = document.getElementById(`${d.id}_${s.id}`).value; });
+});
+return {id, nom, date, domaines};
 }
 
-function nouveauRapport() {
-  idActif = null;
-  viderFormulaire();
-  afficherVue("form");
-  window.scrollTo(0, 0);
+/* ── Charger ── */
+function chargerDansFormulaire(rapport){
+document.getElementById(“champ-nom”).value = rapport.nom || “”;
+document.getElementById(“champ-date”).value = rapport.date || “”;
+document.getElementById(“form-title-bar”).textContent = rapport.nom || “Nouveau rapport”;
+DOMAINES.forEach(d => SOUS.forEach(s => {
+const el = document.getElementById(`${d.id}_${s.id}`);
+el.value = (rapport.domaines?.[d.id]?.[s.id]) || “”;
+}));
 }
 
-function ouvrirRapport(id) {
-  const rapport = rapports.find(r => r.id === id);
-  if (!rapport) return;
-  idActif = id;
-  chargerDansFormulaire(rapport);
-  afficherVue("form");
-  window.scrollTo(0, 0);
+function viderFormulaire(){
+document.getElementById(“champ-nom”).value = “”;
+document.getElementById(“champ-date”).value = new Date().toISOString().split(“T”)[0];
+document.getElementById(“form-title-bar”).textContent = “Nouveau rapport”;
+document.getElementById(“autosave-note”).textContent = “Les données sont sauvegardées automatiquement.”;
+document.getElementById(“autosave-note”).className = “autosave-note”;
+DOMAINES.forEach(d => SOUS.forEach(s => { document.getElementById(`${d.id}_${s.id}`).value = “”; }));
 }
 
-function supprimerRapport(id, e) {
-  e.stopPropagation();
-  const rapport = rapports.find(r => r.id === id);
-  if (!rapport) return;
-  if (!confirm(`Supprimer le rapport de "${rapport.nom}" ?`)) return;
-  rapports = rapports.filter(r => r.id !== id);
-  localStorage.setItem("mangrove_rapports", JSON.stringify(rapports));
-  renderListe();
+function mettreAJourTitre(){
+document.getElementById(“form-title-bar”).textContent = document.getElementById(“champ-nom”).value.trim() || “Nouveau rapport”;
+autoSave();
 }
 
-function retourListe() {
-  afficherVue("list");
-  renderListe();
+/* ── Navigation ── */
+function nouveauRapport(){ idActif=null; viderFormulaire(); afficherVue(“form”); window.scrollTo(0,0); }
+function ouvrirRapport(id){ const r=rapports.find(r=>r.id===id); if(!r) return; idActif=id; chargerDansFormulaire(r); afficherVue(“form”); window.scrollTo(0,0); }
+function retourListe(){ afficherVue(“list”); renderListe(); }
+
+function afficherVue(vue){
+[“list”,“form”,“backup”].forEach(v => document.getElementById(“view-”+v).classList.toggle(“active”, v===vue));
+if(vue===“backup”) mettreAJourStats();
 }
 
-function afficherVue(vue) {
-  document.getElementById("view-list").classList.toggle("active", vue === "list");
-  document.getElementById("view-form").classList.toggle("active", vue === "form");
+/* ── Liste ── */
+function renderListe(){
+const container = document.getElementById(“list-rapports”);
+const empty = document.getElementById(“empty-msg”);
+container.innerHTML = “”;
+if(rapports.length===0){ empty.style.display=“block”; return; }
+empty.style.display=“none”;
+rapports.forEach(r => {
+const card = document.createElement(“div”);
+card.className = “rapport-card”;
+const dateStr = r.date ? new Date(r.date+“T12:00:00”).toLocaleDateString(“fr-CA”,{year:“numeric”,month:“long”,day:“numeric”}) : “Sans date”;
+card.innerHTML = ` <div class="card-info" onclick="ouvrirRapport(${r.id})"> <div class="card-name">${r.nom||"Sans nom"}</div> <div class="card-date">${dateStr}</div> </div> <div class="card-right"> <button class="btn-delete" onclick="supprimerRapport(${r.id},event)">Supprimer</button> <span class="card-arrow" onclick="ouvrirRapport(${r.id})">›</span> </div>`;
+container.appendChild(card);
+});
 }
 
-function renderListe() {
-  const container = document.getElementById("list-rapports");
-  const empty = document.getElementById("empty-msg");
-  container.innerHTML = "";
-  if (rapports.length === 0) { empty.style.display = "block"; return; }
-  empty.style.display = "none";
-  rapports.forEach(r => {
-    const card = document.createElement("div");
-    card.className = "rapport-card";
-    const dateStr = r.date ? new Date(r.date + "T12:00:00").toLocaleDateString("fr-CA", { year: "numeric", month: "long", day: "numeric" }) : "Sans date";
-    card.innerHTML = `
-      <div class="card-info" onclick="ouvrirRapport(${r.id})">
-        <div class="card-name">${r.nom || "Sans nom"}</div>
-        <div class="card-date">${dateStr}</div>
-      </div>
-      <div class="card-actions">
-        <button class="btn-delete" onclick="supprimerRapport(${r.id}, event)">Supprimer</button>
-        <span class="card-arrow" onclick="ouvrirRapport(${r.id})">›</span>
-      </div>`;
-    container.appendChild(card);
-  });
+function supprimerRapport(id, e){
+e.stopPropagation();
+const r = rapports.find(r=>r.id===id);
+if(!r) return;
+if(!confirm(`Supprimer le rapport de "${r.nom}" ?`)) return;
+rapports = rapports.filter(r=>r.id!==id);
+localStorage.setItem(“mangrove_rapports”, JSON.stringify(rapports));
+renderListe();
 }
 
-function imprimerPDF() {
-  sauvegarder();
-  setTimeout(() => window.print(), 300);
+/* ── PDF ── */
+function imprimerPDF(){
+sauvegarder();
+setTimeout(()=>window.print(), 300);
 }
 
-function afficherIndicateur() {
-  const heure = new Date().toLocaleTimeString("fr-CA", { hour: "2-digit", minute: "2-digit" });
-  const existing = document.querySelector(".save-indicator");
-  if (existing) existing.remove();
-  const ind = document.createElement("div");
-  ind.className = "save-indicator saved";
-  ind.textContent = "✓ Sauvegardé à " + heure;
-  document.querySelector(".form-actions").after(ind);
-  setTimeout(() => { if (ind.parentNode) ind.remove(); }, 3000);
+/* ── Export ── */
+function exporterDonnees(){
+const data = {
+version: 1,
+exportDate: new Date().toISOString(),
+rapports: rapports
+};
+const blob = new Blob([JSON.stringify(data, null, 2)], {type:“application/json”});
+const url = URL.createObjectURL(blob);
+const a = document.createElement(“a”);
+const dateStr = new Date().toLocaleDateString(“fr-CA”).replace(///g,”-”);
+a.href = url;
+a.download = `rapports-mangrove-${dateStr}.json`;
+a.click();
+URL.revokeObjectURL(url);
 }
 
-// ── Init ──
-afficherVue("list");
+/* ── Import ── */
+function importerDonnees(event){
+const file = event.target.files[0];
+if(!file) return;
+const reader = new FileReader();
+const status = document.getElementById(“import-status”);
+reader.onload = function(e){
+try {
+const data = JSON.parse(e.target.result);
+if(!data.rapports || !Array.isArray(data.rapports)) throw new Error(“Format invalide”);
+let ajouts = 0;
+data.rapports.forEach(r => {
+if(!rapports.find(existing => existing.id === r.id)){
+rapports.unshift(r);
+ajouts++;
+}
+});
+localStorage.setItem(“mangrove_rapports”, JSON.stringify(rapports));
+mettreAJourStats();
+status.textContent = ajouts > 0
+? `✓ ${ajouts} rapport(s) importé(s) avec succès !`
+: “✓ Aucun nouveau rapport (tout était déjà là).”;
+status.className = “import-status ok”;
+} catch(err){
+status.textContent = “Erreur : fichier non reconnu. Assurez-vous d’utiliser un fichier exporté depuis cette app.”;
+status.className = “import-status err”;
+}
+event.target.value = “”;
+setTimeout(()=>{ status.textContent=””; status.className=“import-status”; }, 5000);
+};
+reader.readAsText(file);
+}
+
+/* ── Effacer tout ── */
+function toutEffacer(){
+if(!confirm(“Effacer TOUS les rapports ? Cette action est irréversible.\n\nFaites d’abord une exportation si vous voulez garder vos données.”)) return;
+rapports = [];
+localStorage.removeItem(“mangrove_rapports”);
+localStorage.removeItem(“mangrove_last_save”);
+mettreAJourStats();
+alert(“Toutes les données ont été effacées.”);
+}
+
+/* ── Stats ── */
+function mettreAJourStats(){
+document.getElementById(“stat-count”).textContent = rapports.length;
+const last = localStorage.getItem(“mangrove_last_save”);
+if(last){
+const d = new Date(last);
+document.getElementById(“stat-date”).textContent = d.toLocaleDateString(“fr-CA”,{day:“numeric”,month:“short”});
+} else {
+document.getElementById(“stat-date”).textContent = “—”;
+}
+}
+
+/* ── Init ── */
+afficherVue(“list”);
 renderListe();
 </script>
+
 </body>
 </html>
