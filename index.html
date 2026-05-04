@@ -363,7 +363,7 @@ function exporterDonnees(){
   const a = document.createElement("a");
   const dateStr = new Date().toLocaleDateString("fr-CA").replace(/\//g,"-");
   a.href = url;
-  a.download = `rapports-mangrove-${dateStr}.json`;
+  a.download = `rapports-educatifs-${dateStr}.json`;
   a.click();
   URL.revokeObjectURL(url);
 }
