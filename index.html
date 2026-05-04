@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
@@ -43,7 +42,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;ba
 .form-body{padding:18px;padding-bottom:110px;}
 .field-block{margin-bottom:16px;}
 .field-block label{display:block;font-size:12px;font-weight:600;color:#8E8E93;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;}
-.field-block input[type=“text”],.field-block input[type=“date”]{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #E0E0E0;background:#fff;font-size:16px;color:#1C1C1E;font-family:inherit;-webkit-appearance:none;}
+.field-block input[type="text"],.field-block input[type="date"]{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #E0E0E0;background:#fff;font-size:16px;color:#1C1C1E;font-family:inherit;-webkit-appearance:none;}
 .field-block input:focus{outline:2px solid #2980B9;border-color:transparent;}
 .domaine-card{border-radius:14px;overflow:hidden;margin-bottom:18px;border:2px solid;}
 .domaine-header{padding:12px 16px;font-size:15px;font-weight:600;color:#fff;}
@@ -78,21 +77,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;ba
 
 /* PRINT */
 @media print{
-body{background:#fff;}
-.topbar,.form-topbar,.form-actions,.btn-back,.btn-save-top,#view-list,#view-backup,.autosave-note{display:none!important;}
-#view-form{display:block!important;}
-.form-body{padding:0 16px;padding-bottom:0;}
-.field-block input{border:none;border-bottom:1px solid #ccc;border-radius:0;padding:4px 0;font-size:18px;}
-.sous-section textarea{border:none;border-bottom:1px solid #ddd;border-radius:0;background:transparent;min-height:70px;}
-.domaine-card{page-break-inside:avoid;margin-bottom:14px;}
+  body{background:#fff;}
+  .topbar,.form-topbar,.form-actions,.btn-back,.btn-save-top,#view-list,#view-backup,.autosave-note{display:none!important;}
+  #view-form{display:block!important;}
+  .form-body{padding:0 16px;padding-bottom:0;}
+  .field-block input{border:none;border-bottom:1px solid #ccc;border-radius:0;padding:4px 0;font-size:18px;}
+  .sous-section textarea{border:none;border-bottom:1px solid #ddd;border-radius:0;background:transparent;min-height:70px;}
+  .domaine-card{page-break-inside:avoid;margin-bottom:14px;}
 }
 </style>
-
 </head>
 <body>
 
 <!-- ══ LISTE ══ -->
-
 <div id="view-list">
   <div class="topbar">
     <h1>📋 Mes rapports</h1>
@@ -112,7 +109,6 @@ body{background:#fff;}
 </div>
 
 <!-- ══ FORMULAIRE ══ -->
-
 <div id="view-form">
   <div class="form-topbar">
     <button class="btn-back" onclick="retourListe()">‹ Retour</button>
@@ -138,7 +134,6 @@ body{background:#fff;}
 </div>
 
 <!-- ══ SAUVEGARDE ══ -->
-
 <div id="view-backup">
   <div class="topbar">
     <h1>Sauvegarde</h1>
@@ -146,31 +141,29 @@ body{background:#fff;}
   </div>
   <div class="backup-wrap">
 
-```
-<div class="backup-section">
-  <div class="stats-row">
-    <div class="stat-card"><div class="stat-num" id="stat-count">0</div><div class="stat-label">rapports</div></div>
-    <div class="stat-card"><div class="stat-num" id="stat-date">—</div><div class="stat-label">dernière sauvegarde</div></div>
-  </div>
-  <h2>📤 Exporter une copie</h2>
-  <p>Crée un fichier de sauvegarde à envoyer dans Google Drive, par courriel ou garder dans les Fichiers de l'iPad. En cas de problème, ce fichier permet de tout récupérer.</p>
-  <button class="btn-export" onclick="exporterDonnees()">Exporter mes rapports</button>
-</div>
+    <div class="backup-section">
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" id="stat-count">0</div><div class="stat-label">rapports</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-date">—</div><div class="stat-label">dernière sauvegarde</div></div>
+      </div>
+      <h2>📤 Exporter une copie</h2>
+      <p>Crée un fichier de sauvegarde à envoyer dans Google Drive, par courriel ou garder dans les Fichiers de l'iPad. En cas de problème, ce fichier permet de tout récupérer.</p>
+      <button class="btn-export" onclick="exporterDonnees()">Exporter mes rapports</button>
+    </div>
 
-<div class="backup-section">
-  <h2>📥 Importer une sauvegarde</h2>
-  <p>Si vous avez changé d'appareil ou perdu les données, importez votre fichier de sauvegarde pour tout récupérer. Les rapports existants seront conservés.</p>
-  <button class="btn-import" onclick="document.getElementById('input-import').click()">Choisir un fichier de sauvegarde</button>
-  <input type="file" id="input-import" accept=".json" style="display:none" onchange="importerDonnees(event)">
-  <div class="import-status" id="import-status"></div>
-</div>
+    <div class="backup-section">
+      <h2>📥 Importer une sauvegarde</h2>
+      <p>Si vous avez changé d'appareil ou perdu les données, importez votre fichier de sauvegarde pour tout récupérer. Les rapports existants seront conservés.</p>
+      <button class="btn-import" onclick="document.getElementById('input-import').click()">Choisir un fichier de sauvegarde</button>
+      <input type="file" id="input-import" accept=".json" style="display:none" onchange="importerDonnees(event)">
+      <div class="import-status" id="import-status"></div>
+    </div>
 
-<div class="backup-section danger">
-  <h2>⚠ Effacer toutes les données</h2>
-  <p>Supprime définitivement tous les rapports de cet appareil. Faites une exportation d'abord si vous voulez garder une copie.</p>
-  <button class="btn-danger" onclick="toutEffacer()">Effacer tous les rapports</button>
-</div>
-```
+    <div class="backup-section danger">
+      <h2>⚠ Effacer toutes les données</h2>
+      <p>Supprime définitivement tous les rapports de cet appareil. Faites une exportation d'abord si vous voulez garder une copie.</p>
+      <button class="btn-danger" onclick="toutEffacer()">Effacer tous les rapports</button>
+    </div>
 
   </div>
 </div>
@@ -204,227 +197,230 @@ let autoSaveTimer = null;
       html += `<div class="sous-section" style="border-top-color:${d.bordure};background:${d.fond};">
         <label style="color:${d.texte};">${s.label}</label>
         <textarea id="${d.id}_${s.id}" placeholder="Écrivez ici…" oninput="autoSave()"></textarea>
-
-```
-  </div>`;
-});
-card.innerHTML = html;
-wrap.appendChild(card);
-```
-
-});
+      </div>`;
+    });
+    card.innerHTML = html;
+    wrap.appendChild(card);
+  });
 })();
 
 /* ── Auto-save ── */
 function autoSave(){
-clearTimeout(autoSaveTimer);
-autoSaveTimer = setTimeout(() => {
-const nom = document.getElementById(“champ-nom”).value.trim();
-if(!nom) return;
-sauvegarder(true);
-}, 1500);
+  clearTimeout(autoSaveTimer);
+  autoSaveTimer = setTimeout(() => {
+    const nom = document.getElementById("champ-nom").value.trim();
+    if(!nom) return;
+    sauvegarder(true);
+  }, 1500);
 }
 
 /* ── Sauvegarder ── */
 function sauvegarder(silencieux=false){
-const rapport = collecterFormulaire();
-if(!rapport.nom){
-if(!silencieux){ document.getElementById(“champ-nom”).focus(); alert(“Veuillez entrer le nom de l’enfant.”); }
-return;
-}
-if(idActif !== null){
-const idx = rapports.findIndex(r => r.id === idActif);
-if(idx !== -1) rapports[idx] = rapport;
-else { rapports.unshift(rapport); }
-} else {
-idActif = rapport.id;
-rapports.unshift(rapport);
-}
-localStorage.setItem(“mangrove_rapports”, JSON.stringify(rapports));
-localStorage.setItem(“mangrove_last_save”, new Date().toISOString());
-if(!silencieux) montrerConfirmation();
-else mettreAJourNoteAuto();
-document.getElementById(“form-title-bar”).textContent = rapport.nom;
+  const rapport = collecterFormulaire();
+  if(!rapport.nom){
+    if(!silencieux){ document.getElementById("champ-nom").focus(); alert("Veuillez entrer le nom de l'enfant."); }
+    return;
+  }
+  if(idActif !== null){
+    const idx = rapports.findIndex(r => r.id === idActif);
+    if(idx !== -1) rapports[idx] = rapport;
+    else { rapports.unshift(rapport); }
+  } else {
+    idActif = rapport.id;
+    rapports.unshift(rapport);
+  }
+  localStorage.setItem("mangrove_rapports", JSON.stringify(rapports));
+  localStorage.setItem("mangrove_last_save", new Date().toISOString());
+  if(!silencieux) montrerConfirmation();
+  else mettreAJourNoteAuto();
+  document.getElementById("form-title-bar").textContent = rapport.nom;
 }
 
 function montrerConfirmation(){
-const note = document.getElementById(“autosave-note”);
-const heure = new Date().toLocaleTimeString(“fr-CA”,{hour:“2-digit”,minute:“2-digit”});
-note.textContent = “✓ Sauvegardé à “ + heure;
-note.className = “autosave-note saved”;
-setTimeout(() => {
-note.textContent = “Les données sont sauvegardées automatiquement.”;
-note.className = “autosave-note”;
-}, 3000);
+  const note = document.getElementById("autosave-note");
+  const heure = new Date().toLocaleTimeString("fr-CA",{hour:"2-digit",minute:"2-digit"});
+  note.textContent = "✓ Sauvegardé à " + heure;
+  note.className = "autosave-note saved";
+  setTimeout(() => {
+    note.textContent = "Les données sont sauvegardées automatiquement.";
+    note.className = "autosave-note";
+  }, 3000);
 }
 
 function mettreAJourNoteAuto(){
-const note = document.getElementById(“autosave-note”);
-const heure = new Date().toLocaleTimeString(“fr-CA”,{hour:“2-digit”,minute:“2-digit”});
-note.textContent = “✓ Sauvegarde automatique à “ + heure;
-note.className = “autosave-note saved”;
-setTimeout(() => {
-note.textContent = “Les données sont sauvegardées automatiquement.”;
-note.className = “autosave-note”;
-}, 2000);
+  const note = document.getElementById("autosave-note");
+  const heure = new Date().toLocaleTimeString("fr-CA",{hour:"2-digit",minute:"2-digit"});
+  note.textContent = "✓ Sauvegarde automatique à " + heure;
+  note.className = "autosave-note saved";
+  setTimeout(() => {
+    note.textContent = "Les données sont sauvegardées automatiquement.";
+    note.className = "autosave-note";
+  }, 2000);
 }
 
 /* ── Collecte ── */
 function collecterFormulaire(){
-const id = idActif !== null ? idActif : Date.now();
-const nom = document.getElementById(“champ-nom”).value.trim();
-const date = document.getElementById(“champ-date”).value;
-const domaines = {};
-DOMAINES.forEach(d => {
-domaines[d.id] = {};
-SOUS.forEach(s => { domaines[d.id][s.id] = document.getElementById(`${d.id}_${s.id}`).value; });
-});
-return {id, nom, date, domaines};
+  const id = idActif !== null ? idActif : Date.now();
+  const nom = document.getElementById("champ-nom").value.trim();
+  const date = document.getElementById("champ-date").value;
+  const domaines = {};
+  DOMAINES.forEach(d => {
+    domaines[d.id] = {};
+    SOUS.forEach(s => { domaines[d.id][s.id] = document.getElementById(`${d.id}_${s.id}`).value; });
+  });
+  return {id, nom, date, domaines};
 }
 
 /* ── Charger ── */
 function chargerDansFormulaire(rapport){
-document.getElementById(“champ-nom”).value = rapport.nom || “”;
-document.getElementById(“champ-date”).value = rapport.date || “”;
-document.getElementById(“form-title-bar”).textContent = rapport.nom || “Nouveau rapport”;
-DOMAINES.forEach(d => SOUS.forEach(s => {
-const el = document.getElementById(`${d.id}_${s.id}`);
-el.value = (rapport.domaines?.[d.id]?.[s.id]) || “”;
-}));
+  document.getElementById("champ-nom").value = rapport.nom || "";
+  document.getElementById("champ-date").value = rapport.date || "";
+  document.getElementById("form-title-bar").textContent = rapport.nom || "Nouveau rapport";
+  DOMAINES.forEach(d => SOUS.forEach(s => {
+    const el = document.getElementById(`${d.id}_${s.id}`);
+    el.value = (rapport.domaines?.[d.id]?.[s.id]) || "";
+  }));
 }
 
 function viderFormulaire(){
-document.getElementById(“champ-nom”).value = “”;
-document.getElementById(“champ-date”).value = new Date().toISOString().split(“T”)[0];
-document.getElementById(“form-title-bar”).textContent = “Nouveau rapport”;
-document.getElementById(“autosave-note”).textContent = “Les données sont sauvegardées automatiquement.”;
-document.getElementById(“autosave-note”).className = “autosave-note”;
-DOMAINES.forEach(d => SOUS.forEach(s => { document.getElementById(`${d.id}_${s.id}`).value = “”; }));
+  document.getElementById("champ-nom").value = "";
+  document.getElementById("champ-date").value = new Date().toISOString().split("T")[0];
+  document.getElementById("form-title-bar").textContent = "Nouveau rapport";
+  document.getElementById("autosave-note").textContent = "Les données sont sauvegardées automatiquement.";
+  document.getElementById("autosave-note").className = "autosave-note";
+  DOMAINES.forEach(d => SOUS.forEach(s => { document.getElementById(`${d.id}_${s.id}`).value = ""; }));
 }
 
 function mettreAJourTitre(){
-document.getElementById(“form-title-bar”).textContent = document.getElementById(“champ-nom”).value.trim() || “Nouveau rapport”;
-autoSave();
+  document.getElementById("form-title-bar").textContent = document.getElementById("champ-nom").value.trim() || "Nouveau rapport";
+  autoSave();
 }
 
 /* ── Navigation ── */
-function nouveauRapport(){ idActif=null; viderFormulaire(); afficherVue(“form”); window.scrollTo(0,0); }
-function ouvrirRapport(id){ const r=rapports.find(r=>r.id===id); if(!r) return; idActif=id; chargerDansFormulaire(r); afficherVue(“form”); window.scrollTo(0,0); }
-function retourListe(){ afficherVue(“list”); renderListe(); }
+function nouveauRapport(){ idActif=null; viderFormulaire(); afficherVue("form"); window.scrollTo(0,0); }
+function ouvrirRapport(id){ const r=rapports.find(r=>r.id===id); if(!r) return; idActif=id; chargerDansFormulaire(r); afficherVue("form"); window.scrollTo(0,0); }
+function retourListe(){ afficherVue("list"); renderListe(); }
 
 function afficherVue(vue){
-[“list”,“form”,“backup”].forEach(v => document.getElementById(“view-”+v).classList.toggle(“active”, v===vue));
-if(vue===“backup”) mettreAJourStats();
+  ["list","form","backup"].forEach(v => document.getElementById("view-"+v).classList.toggle("active", v===vue));
+  if(vue==="backup") mettreAJourStats();
 }
 
 /* ── Liste ── */
 function renderListe(){
-const container = document.getElementById(“list-rapports”);
-const empty = document.getElementById(“empty-msg”);
-container.innerHTML = “”;
-if(rapports.length===0){ empty.style.display=“block”; return; }
-empty.style.display=“none”;
-rapports.forEach(r => {
-const card = document.createElement(“div”);
-card.className = “rapport-card”;
-const dateStr = r.date ? new Date(r.date+“T12:00:00”).toLocaleDateString(“fr-CA”,{year:“numeric”,month:“long”,day:“numeric”}) : “Sans date”;
-card.innerHTML = ` <div class="card-info" onclick="ouvrirRapport(${r.id})"> <div class="card-name">${r.nom||"Sans nom"}</div> <div class="card-date">${dateStr}</div> </div> <div class="card-right"> <button class="btn-delete" onclick="supprimerRapport(${r.id},event)">Supprimer</button> <span class="card-arrow" onclick="ouvrirRapport(${r.id})">›</span> </div>`;
-container.appendChild(card);
-});
+  const container = document.getElementById("list-rapports");
+  const empty = document.getElementById("empty-msg");
+  container.innerHTML = "";
+  if(rapports.length===0){ empty.style.display="block"; return; }
+  empty.style.display="none";
+  rapports.forEach(r => {
+    const card = document.createElement("div");
+    card.className = "rapport-card";
+    const dateStr = r.date ? new Date(r.date+"T12:00:00").toLocaleDateString("fr-CA",{year:"numeric",month:"long",day:"numeric"}) : "Sans date";
+    card.innerHTML = `
+      <div class="card-info" onclick="ouvrirRapport(${r.id})">
+        <div class="card-name">${r.nom||"Sans nom"}</div>
+        <div class="card-date">${dateStr}</div>
+      </div>
+      <div class="card-right">
+        <button class="btn-delete" onclick="supprimerRapport(${r.id},event)">Supprimer</button>
+        <span class="card-arrow" onclick="ouvrirRapport(${r.id})">›</span>
+      </div>`;
+    container.appendChild(card);
+  });
 }
 
 function supprimerRapport(id, e){
-e.stopPropagation();
-const r = rapports.find(r=>r.id===id);
-if(!r) return;
-if(!confirm(`Supprimer le rapport de "${r.nom}" ?`)) return;
-rapports = rapports.filter(r=>r.id!==id);
-localStorage.setItem(“mangrove_rapports”, JSON.stringify(rapports));
-renderListe();
+  e.stopPropagation();
+  const r = rapports.find(r=>r.id===id);
+  if(!r) return;
+  if(!confirm(`Supprimer le rapport de "${r.nom}" ?`)) return;
+  rapports = rapports.filter(r=>r.id!==id);
+  localStorage.setItem("mangrove_rapports", JSON.stringify(rapports));
+  renderListe();
 }
 
 /* ── PDF ── */
 function imprimerPDF(){
-sauvegarder();
-setTimeout(()=>window.print(), 300);
+  sauvegarder();
+  setTimeout(()=>window.print(), 300);
 }
 
 /* ── Export ── */
 function exporterDonnees(){
-const data = {
-version: 1,
-exportDate: new Date().toISOString(),
-rapports: rapports
-};
-const blob = new Blob([JSON.stringify(data, null, 2)], {type:“application/json”});
-const url = URL.createObjectURL(blob);
-const a = document.createElement(“a”);
-const dateStr = new Date().toLocaleDateString(“fr-CA”).replace(///g,”-”);
-a.href = url;
-a.download = `rapports-mangrove-${dateStr}.json`;
-a.click();
-URL.revokeObjectURL(url);
+  const data = {
+    version: 1,
+    exportDate: new Date().toISOString(),
+    rapports: rapports
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  const dateStr = new Date().toLocaleDateString("fr-CA").replace(/\//g,"-");
+  a.href = url;
+  a.download = `rapports-mangrove-${dateStr}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 /* ── Import ── */
 function importerDonnees(event){
-const file = event.target.files[0];
-if(!file) return;
-const reader = new FileReader();
-const status = document.getElementById(“import-status”);
-reader.onload = function(e){
-try {
-const data = JSON.parse(e.target.result);
-if(!data.rapports || !Array.isArray(data.rapports)) throw new Error(“Format invalide”);
-let ajouts = 0;
-data.rapports.forEach(r => {
-if(!rapports.find(existing => existing.id === r.id)){
-rapports.unshift(r);
-ajouts++;
-}
-});
-localStorage.setItem(“mangrove_rapports”, JSON.stringify(rapports));
-mettreAJourStats();
-status.textContent = ajouts > 0
-? `✓ ${ajouts} rapport(s) importé(s) avec succès !`
-: “✓ Aucun nouveau rapport (tout était déjà là).”;
-status.className = “import-status ok”;
-} catch(err){
-status.textContent = “Erreur : fichier non reconnu. Assurez-vous d’utiliser un fichier exporté depuis cette app.”;
-status.className = “import-status err”;
-}
-event.target.value = “”;
-setTimeout(()=>{ status.textContent=””; status.className=“import-status”; }, 5000);
-};
-reader.readAsText(file);
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  const status = document.getElementById("import-status");
+  reader.onload = function(e){
+    try {
+      const data = JSON.parse(e.target.result);
+      if(!data.rapports || !Array.isArray(data.rapports)) throw new Error("Format invalide");
+      let ajouts = 0;
+      data.rapports.forEach(r => {
+        if(!rapports.find(existing => existing.id === r.id)){
+          rapports.unshift(r);
+          ajouts++;
+        }
+      });
+      localStorage.setItem("mangrove_rapports", JSON.stringify(rapports));
+      mettreAJourStats();
+      status.textContent = ajouts > 0
+        ? `✓ ${ajouts} rapport(s) importé(s) avec succès !`
+        : "✓ Aucun nouveau rapport (tout était déjà là).";
+      status.className = "import-status ok";
+    } catch(err){
+      status.textContent = "Erreur : fichier non reconnu. Assurez-vous d'utiliser un fichier exporté depuis cette app.";
+      status.className = "import-status err";
+    }
+    event.target.value = "";
+    setTimeout(()=>{ status.textContent=""; status.className="import-status"; }, 5000);
+  };
+  reader.readAsText(file);
 }
 
 /* ── Effacer tout ── */
 function toutEffacer(){
-if(!confirm(“Effacer TOUS les rapports ? Cette action est irréversible.\n\nFaites d’abord une exportation si vous voulez garder vos données.”)) return;
-rapports = [];
-localStorage.removeItem(“mangrove_rapports”);
-localStorage.removeItem(“mangrove_last_save”);
-mettreAJourStats();
-alert(“Toutes les données ont été effacées.”);
+  if(!confirm("Effacer TOUS les rapports ? Cette action est irréversible.\n\nFaites d'abord une exportation si vous voulez garder vos données.")) return;
+  rapports = [];
+  localStorage.removeItem("mangrove_rapports");
+  localStorage.removeItem("mangrove_last_save");
+  mettreAJourStats();
+  alert("Toutes les données ont été effacées.");
 }
 
 /* ── Stats ── */
 function mettreAJourStats(){
-document.getElementById(“stat-count”).textContent = rapports.length;
-const last = localStorage.getItem(“mangrove_last_save”);
-if(last){
-const d = new Date(last);
-document.getElementById(“stat-date”).textContent = d.toLocaleDateString(“fr-CA”,{day:“numeric”,month:“short”});
-} else {
-document.getElementById(“stat-date”).textContent = “—”;
-}
+  document.getElementById("stat-count").textContent = rapports.length;
+  const last = localStorage.getItem("mangrove_last_save");
+  if(last){
+    const d = new Date(last);
+    document.getElementById("stat-date").textContent = d.toLocaleDateString("fr-CA",{day:"numeric",month:"short"});
+  } else {
+    document.getElementById("stat-date").textContent = "—";
+  }
 }
 
 /* ── Init ── */
-afficherVue(“list”);
+afficherVue("list");
 renderListe();
 </script>
-
 </body>
 </html>
