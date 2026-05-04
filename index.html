@@ -48,7 +48,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;ba
 .domaine-header{padding:12px 16px;font-size:15px;font-weight:600;color:#fff;}
 .sous-section{padding:12px 14px;border-top:1px solid;}
 .sous-section label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;}
-.sous-section textarea{width:100%;min-height:80px;padding:10px 12px;border-radius:10px;border:1px solid rgba(0,0,0,0.12);background:rgba(255,255,255,0.75);font-size:15px;font-family:inherit;color:#1C1C1E;resize:vertical;line-height:1.5;}
+.sous-section textarea{width:100%;min-height:80px;padding:10px 12px;border-radius:10px;border:1px solid rgba(0,0,0,0.12);background:rgba(255,255,255,0.75);font-size:15px;font-family:inherit;color:#1C1C1E;resize:none;line-height:1.5;overflow:hidden;}
 .sous-section textarea:focus{outline:none;border-color:rgba(0,0,0,0.4);}
 .autosave-note{text-align:center;font-size:12px;color:#8E8E93;margin-top:-10px;margin-bottom:18px;}
 .autosave-note.saved{color:#27AE60;}
@@ -196,13 +196,17 @@ let autoSaveTimer = null;
     SOUS.forEach(s => {
       html += `<div class="sous-section" style="border-top-color:${d.bordure};background:${d.fond};">
         <label style="color:${d.texte};">${s.label}</label>
-        <textarea id="${d.id}_${s.id}" placeholder="Écrivez ici…" oninput="autoSave()"></textarea>
+        <textarea id="${d.id}_${s.id}" placeholder="Écrivez ici…" oninput="autoResize(this);autoSave()"></textarea>
       </div>`;
     });
     card.innerHTML = html;
     wrap.appendChild(card);
   });
 })();
+
+/* ── Auto-resize ── */
+function autoResize(el){ el.style.height="auto"; el.style.height=el.scrollHeight+"px"; }
+function autoResizeAll(){ document.querySelectorAll(".sous-section textarea").forEach(autoResize); }
 
 /* ── Auto-save ── */
 function autoSave(){
@@ -280,6 +284,7 @@ function chargerDansFormulaire(rapport){
     const el = document.getElementById(`${d.id}_${s.id}`);
     el.value = (rapport.domaines?.[d.id]?.[s.id]) || "";
   }));
+  setTimeout(autoResizeAll, 0);
 }
 
 function viderFormulaire(){
@@ -358,7 +363,7 @@ function exporterDonnees(){
   const a = document.createElement("a");
   const dateStr = new Date().toLocaleDateString("fr-CA").replace(/\//g,"-");
   a.href = url;
-  a.download = `dossier-educatif-${dateStr}.json`;
+  a.download = `rapports-mangrove-${dateStr}.json`;
   a.click();
   URL.revokeObjectURL(url);
 }
